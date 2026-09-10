@@ -8,8 +8,7 @@ class VectorStore(ABC):
         chunks: List[Dict],
         vectors: Optional[List[List[float]]] = None,
         embedding: Optional[Any] = None,
-        batch_size: int = 10,
-        cancel_event: Optional[Any] = None,
+        batch_size: int = 10
     ) -> bool:
         """
         Inserts document chunks and their corresponding embeddings into the vector database.
@@ -24,9 +23,6 @@ class VectorStore(ABC):
             vectors: A list of pre-computed vector arrays.
             embedding: An instance of the Embedding class to generate vectors.
             batch_size: Number of chunks to process in a single bulk operation.
-            cancel_event: Optional threading.Event; if set between batches, insertion is
-                          aborted early. Only acted upon when clean_files=True so partial
-                          VDB state is always cleaned up.
 
         Returns:
             bool: True if indexing succeeded, False if it failed
