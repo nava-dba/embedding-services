@@ -45,7 +45,7 @@ func DeployCatalog(ctx context.Context, opts catalogUtils.PodmanConfigureOptions
 	}
 
 	// Load SSL certificates if provided
-	if err := caddyCtx.LoadSSLCertificates(ctx, opts.BaseDir, opts.SSLCertPath, opts.SSLKeyPath); err != nil {
+	if err := caddyCtx.LoadSSLCertificates(ctx, opts.SSLCertPath, opts.SSLKeyPath); err != nil {
 		return err
 	}
 
@@ -136,7 +136,7 @@ func handlePostDeployment(ctx context.Context, caddyCtx *caddy.Context, deployCt
 
 	if !opts.SkipLocalWorker {
 		if err := JoinAsLocalWorker(ctx, deployCtx.Runtime, opts, catalogClient); err != nil {
-			return fmt.Errorf("local worker join failed: %v", err)
+			return fmt.Errorf("worker join failed: %v", err)
 		}
 	}
 

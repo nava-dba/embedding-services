@@ -33,7 +33,7 @@ func UninstallCatalog(ctx context.Context, opts utils.UninstallOptions) error {
 	// Check before catalog pods are deleted whether a local worker is co-located.
 	isLocalWorker, err := workercommon.IsOpenShiftLocalWorker(ctx, rt)
 	if err != nil {
-		return fmt.Errorf("failed to check local worker: %w", err)
+		return fmt.Errorf("failed to check worker: %w", err)
 	}
 
 	// Confirm deletion unless auto-yes is set
@@ -72,12 +72,22 @@ func uninstallCatalogResources(ctx context.Context, rt runtime.Runtime, catalog,
 	}
 
 	if !skipCleanup {
+		appLabel := fmt.Sprintf("%s=%s", constants.ApplicationAnnotationKey, catalog)
+
 		logger.DebuglnCtx(ctx, "Delete catalog PVCs...")
 
-		if err := rt.DeletePVCs(ctx, fmt.Sprintf("%s=%s", constants.ApplicationAnnotationKey, catalog)); err != nil {
+		if err := rt.DeletePVCs(ctx, appLabel); err != nil {
 			s.Fail("failed to delete catalog pvc")
 
 			return fmt.Errorf("failed to delete PVCs: %w", err)
+		}
+
+		logger.DebuglnCtx(ctx, "Delete catalog secrets...")
+
+		if err := rt.DeleteSecrets(ctx, appLabel); err != nil {
+			s.Fail("failed to delete catalog secrets")
+
+			return fmt.Errorf("failed to delete secrets: %w", err)
 		}
 
 		if err := rt.DeleteNamespace(ctx, namespace); err != nil {
