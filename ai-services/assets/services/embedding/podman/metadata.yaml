@@ -1,11 +1,8 @@
-name: similarity
+name: embedding
 version: "1.0.0"
 
 # Resource requirements
 resources:
-  cpu: 1 # 1 core (rounded up from 500m in OpenShift template)
-  memory: 1073741824 # 1Gi in bytes based on podman template limits
+  cpu: 1 # 1 core
+  memory: 1073741824 # 1Gi in bytes
   storage: 0 # No persistent storage required
-
-
-# Made with Bob
