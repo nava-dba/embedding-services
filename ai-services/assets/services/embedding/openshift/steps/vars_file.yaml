@@ -1,5 +1,5 @@
 containers:
-  - name: "similarity-api"
+  - name: "embedding-api"
     format: ".Status"
     alias: API_STATUS
 

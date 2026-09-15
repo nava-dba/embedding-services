@@ -1,5 +1,5 @@
-similarity:
-  image: icr.io/ai-services-cicd/similarity-service:v0.0.13
+embedding:
+  image: icr.io/ai-services-cicd/embedding-service:v1.0.0
   log_level: "INFO"
   resources:
     requests:
@@ -9,11 +9,5 @@ similarity:
       cpu: "500m"
       memory: "1Gi"
 
-embedding:
-  model:
-    name: ""
-    maxModelLen: 512
-
-reranker:
-  model:
-    name: ""
+model:
+  name: ""

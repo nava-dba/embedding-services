@@ -27,7 +27,7 @@ about:
       - title: "Supported embedding models"
         description: "All models are governed by APPROVED_EMBEDDING_MODELS.json. Set enabled=false to remove a model without deleting its audit record."
         values:
-          - "CLIP ViT-B/32 (openai/clip-vit-base-patch32) — multimodal image + text, 512-d [default]"
+          - "CLIP ViT-B/32 (openai/clip-vit-base-patch32) — multimodal image + text, 512-d [default, DMG approval pending]"
           - "Granite Embedding 278M Multilingual (ibm-granite/granite-embedding-278m-multilingual) — text, 768-d"
           - "ResNet-18 (microsoft/resnet-18) — image, 512-d"
           - "ResNet-50 (microsoft/resnet-50) — image, 2048-d"

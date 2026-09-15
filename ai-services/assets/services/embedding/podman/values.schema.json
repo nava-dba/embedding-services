@@ -22,7 +22,7 @@
         {
           "const": "openai/clip-vit-base-patch32",
           "title": "CLIP ViT-B/32 (multimodal image + text)",
-          "description": "**Modalities:** Image + Text (512-d vectors for both)\n\n**Use Cases:** Image similarity search, Cross-modal retrieval, Oracle 26ai vector sidecar\n\n**Strengths:** Dual-modal (image and text in the same embedding space), Compact 512-d output, Efficient ViT-B/32 architecture"
+          "description": "**Modalities:** Image + Text (512-d vectors for both)\n\n**Use Cases:** Image similarity search, Cross-modal retrieval, Oracle 26ai vector sidecar\n\n**Strengths:** Dual-modal (image and text in the same embedding space), Compact 512-d output, Efficient ViT-B/32 architecture\n\n**⚠ Note:** DMG approval pending. Use at your own risk."
         },
         {
           "const": "ibm-granite/granite-embedding-278m-multilingual",
