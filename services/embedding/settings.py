@@ -1,46 +1,35 @@
 """
-Configuration settings for Similarity Search service.
+Configuration settings for the Embedding service.
 These values can be overridden via environment variables.
 """
-from pydantic import Field, field_validator
-from pydantic_settings import BaseSettings
+from pydantic import Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from common.misc_utils import get_logger
 from common.settings import Settings as CommonSettings
 
-logger = get_logger("settings")
 
+class EmbeddingServiceConfig(BaseSettings):
+    """Embedding service settings."""
 
-class SimilarityConfig(BaseSettings):
-    """Similarity search settings."""
+    model_config = SettingsConfigDict(env_prefix='EMBEDDING_')
 
-    num_chunks_post_search: int = Field(
-        default=10,
-        gt=0,
-        description="Number of results to return when top_k is not specified by the caller",
+    model_name: str = Field(
+        default="openai/clip-vit-base-patch32",
+        description=(
+            "Model to load at startup. Must be a DMG-approved model "
+            "compatible with the vLLM runtime "
+            "(e.g. openai/clip-vit-base-patch32, "
+            "google/siglip-base-patch16-224)."
+        ),
     )
-
-    max_query_token_length: int = Field(
-        default=512,
-        gt=0,
-        description="Maximum token length for similarity search queries",
-    )
-
-    @field_validator('num_chunks_post_search')
-    @classmethod
-    def validate_num_chunks_post_search(cls, v):
-        """Validate num_chunks_post_search with warning fallback."""
-        if not (isinstance(v, int) and v > 0):
-            logger.warning(f"Setting num_chunks_post_search to default '10' as it is missing or malformed in the settings")
-            return 10
-        return v
 
 
 class Settings(BaseSettings):
     common: CommonSettings = Field(default_factory=CommonSettings)
-    similarity: SimilarityConfig = Field(default_factory=SimilarityConfig)
+    embedding_service: EmbeddingServiceConfig = Field(
+        default_factory=EmbeddingServiceConfig
+    )
+
 
 # Global settings instance
 settings = Settings()
-
-# Made with Bob
